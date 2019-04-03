@@ -1,0 +1,91 @@
+#include<SCoop.h>
+defineTask(number);
+defineTask(led);
+
+#define HIGH 99
+#define LOW -99//根据数字改变电平
+
+#define SEG_a 2    
+#define SEG_b 3
+#define SEG_c 4
+#define SEG_d 5
+#define SEG_e 6
+#define SEG_f 7
+#define SEG_g 8
+#define SEG_h 9
+
+#define LED_red 10
+#define LED_green 11//定义所有针脚
+
+unsigned char SET[10][8] =
+{
+ {0, 0, 1, 1, 1, 1, 1, 1},   //0
+ {0, 0, 0, 0, 0, 1, 1, 0},   //1
+ {0, 1, 0, 1, 1, 0, 1, 1},   //2
+ {0, 1, 0, 0, 1, 1, 1, 1},   //3
+ {0, 1, 1, 0, 0, 1, 1, 0},   //4
+ {0, 1, 1, 0, 1, 1, 0, 1},   //5
+ {0, 1, 1, 1, 1, 1, 0, 1},   //6
+ {0, 0, 0, 0, 0, 1, 1, 1},   //7
+ {0, 1, 1, 1, 1, 1, 1, 1},   //8
+ {0, 1, 1, 0, 1, 1, 1, 1}   //9
+};//命名数码管显示
+
+
+void number::setup()
+{
+ pinMode(SEG_a,OUTPUT);    //设置数码管引脚为输出
+ pinMode(SEG_b,OUTPUT);
+ pinMode(SEG_c,OUTPUT);
+ pinMode(SEG_d,OUTPUT);
+ pinMode(SEG_e,OUTPUT);
+ pinMode(SEG_f,OUTPUT);
+ pinMode(SEG_g,OUTPUT);
+ pinMode(SEG_h,OUTPUT);
+}
+
+void number::loop()
+
+{
+  for (int k = 9; k > -1 ; k--) 
+    {int pin = 4;
+for (int s = 0; s < 8; s++) 
+    {
+    digitalWrite(pin, SET[k][s]);
+        pin++;
+  }
+    sleep(1000);//延时一秒      
+   }//暂时全按照正常显示 不闪烁
+
+}
+
+
+void led::setup()
+{
+pinMode(10,OUTPUT);//red灯
+pinMode(11,OUTPUT);//green灯
+}
+
+void led::loop()
+{
+int flag=99;
+if(flag>0)
+{digitalWrite(10, HIGH);
+  sleep(10000);
+  }
+else
+{digitalWrite(10000, HIGH);
+sleep(10000);
+}
+flag=-flag; 
+}
+
+void setup() {
+   mySCoop.start();
+   
+ }//形式setup
+void loop()
+ {
+   yield();
+ }
+

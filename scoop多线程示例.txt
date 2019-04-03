@@ -1,0 +1,45 @@
+格式一
+
+#include <SCoop.h>//引入头文件
+defineTask(Task1);//定义线程一
+ void Task1::setup()
+ {
+   pinMode(13, OUTPUT);
+//多线程的setup
+ }
+ void Task1::loop()
+ {
+   digitalWrite(13, HIGH);
+   sleep(1000);
+   digitalWrite(13, LOW);
+   sleep(1000);
+//多线程的loop
+ }
+
+void setup() {
+   mySCoop.start();
+   
+ }//形式setup
+void loop()
+ {
+   yield();
+ }//形式loop
+
+
+格式二
+#include <SCoop.h>//引入头文件
+ defineTaskLoop(Task2)//快速定义 省去setup
+ {
+   digitalWrite(12, HIGH);
+   sleep(100);
+   digitalWrite(12, LOW);
+   sleep(100);}
+
+void setup() {
+   mySCoop.start();
+   pinMode(12, OUTPUT);
+ }
+void loop()
+ {
+   yield();
+ } 
